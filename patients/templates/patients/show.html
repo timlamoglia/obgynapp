@@ -1,0 +1,37 @@
+<h1>Patient Details</h1>
+Name: {{ patient.name }}
+Birthdate: {{ patient.birth_date }}
+Age: {{ patient.get_age }}
+Sex: {{ patient.sex }}
+Status: {{ patient.status }}
+Address: {{ patient.address }}
+G: {{ patient.g }}
+P: {{ patient.p }}
+A1: {{ patient.a1 }}
+A2: {{ patient.a2 }}
+A3: {{ patient.a3 }}
+A4: {{ patient.a4 }}
+Phone: {{ patient.phone }}
+Religion: {{ patient.religion }}
+Operations History: {{ patient.operations_history }}
+Allergies History: {{ patient.allergies_history }}
+
+<button id="EditButton" class="float-left submit-button" >Edit</button>
+<button id="DeleteButton" class="float-left submit-button" >Delete</button>
+<button id="ViewRecordsButton" class="float-left submit-button" >View Records</button>
+<button id="ViewAllPatientsButton" class="float-left submit-button" >View All Patients</button>
+
+<script type="text/javascript">
+    document.getElementById("EditButton").onclick = function () {
+        location.href = "{% url 'patients:edit' patient.id %}";
+    };
+    document.getElementById("DeleteButton").onclick = function () {
+        location.href = "{% url 'patients:delete' patient.id %}";
+    };
+    document.getElementById("ViewRecordsButton").onclick = function () {
+        location.href = "{% url 'records:index' patient.id %}";
+    };
+    document.getElementById("ViewAllPatientsButton").onclick = function () {
+        location.href = "{% url 'patients:index' %}";
+    };
+</script>

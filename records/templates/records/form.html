@@ -1,0 +1,57 @@
+{% load staticfiles %}
+
+<body>
+	<h1>
+		{% if 'new'	in request.path %}
+		New Record
+		{% else %}
+		Edit Record
+		{% endif %}
+	</h1>
+	Patient: {{ patient.name }}
+
+	<form method="post">{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<button type="button" id="Compute" class="float-left submit-button" >Compute EDC/AOG</button>
+		<input type="submit" value="Submit" />
+	</form>
+
+	{% if 'edit' in request.path %}
+	<button id="ViewRecord" class="float-left submit-button" >View Record</button>
+	<script type="text/javascript">
+	    document.getElementById("ViewRecord").onclick = function () {
+			location.href = "{% url 'records:show' patient.id record.id %}";
+	    };
+	</script>
+	{% else %}
+	<button id="ViewAllButton" class="float-left submit-button" >View All Records</button>
+	<script type="text/javascript">
+	    document.getElementById("ViewAllButton").onclick = function () {
+	        location.href = "{% url 'records:index' patient.id %}";
+	    };
+	</script>
+
+	{% endif %}
+
+	<script type="text/javascript">
+	    var lmpInput = document.getElementById('id_lmp');
+		// var edcInput = document.getElementById('id_edc');
+		var visitDateInput = document.getElementById('id_visit_date');
+	    document.getElementById("Compute").onclick = function () {
+			// alert("Solving the AOG...");
+			var oneDay = 24*60*60*1000;
+			var edcDays = 24*60*60*1000*280;
+			// alert(Date.parse(edcInput.value));
+			var edc = new Date(Date.parse(lmpInput.value) + edcDays);
+			alert(edc.toISOString().slice(0,10));
+			var aog = (Math.round(Math.abs((edc.getTime() - Date.parse(visitDateInput.value))/(oneDay))));
+			aog = Math.round((aog/7)*10) / 10
+			alert(aog);
+			document.getElementById("id_edc").value = edc.toISOString().slice(0,10);
+			document.getElementById("id_aog").value = aog;
+		}
+	</script>
+	<script type="text/javascript"  src="{% static 'records/my.js' %}"></script>
+</body>

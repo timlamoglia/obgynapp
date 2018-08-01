@@ -1,0 +1,27 @@
+<h1>Record Details</h1>
+{{ patient.name }}
+{{ record.visit_date }}
+{{ record.bp }}
+{{ record.fh }}
+{{ record.fht }}
+{{ record.lmp }}
+{{ record.edc }}
+{{ record.aog }}
+{{ record.diagnosis }}
+{{ record.medication }}
+{{ record.return_date }}
+<button id="EditButton" class="float-left submit-button" >Edit</button>
+<button id="DeleteButton" class="float-left submit-button" >Delete</button>
+<button id="ViewAllButton" class="float-left submit-button" >View All Records</button>
+
+<script type="text/javascript">
+    document.getElementById("EditButton").onclick = function () {
+        location.href = "{% url 'records:edit' patient.id record.id %}";
+    };
+    document.getElementById("DeleteButton").onclick = function () {
+        location.href = "{% url 'records:delete' patient.id record.id %}";
+    };
+    document.getElementById("ViewAllButton").onclick = function () {
+        location.href = "{% url 'records:index' patient.id %}";
+    };
+</script>
