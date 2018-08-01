@@ -8,16 +8,16 @@ from patients.models import Patient
 
 # Create your views here.
 
-class DateInput(forms.DateInput):
-	input_type = 'date'
+# class DateInput(forms.DateInput):
+# 	input_type = 'date'
 
 class PatientForm(ModelForm):
 	class Meta:
 		model = Patient
 		fields = '__all__'
-		widgets = {
-			'birth_date': DateInput(),
-		}
+		# widgets = {
+		# 	'birth_date': DateInput(),
+		# }
 @login_required(login_url='/')
 def index(request):
 	patient_list = Patient.objects.all()

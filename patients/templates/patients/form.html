@@ -21,7 +21,12 @@
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <input class="form-control date-picker" type="date" name="birth_date" required id="id_birth_date" />
+        <div class="input-group input-group-alternative">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+          </div>
+          <input class="form-control datepicker" placeholder="Select date" type="text" name="birth_date" required id="id_birth_date" />
+        </div>
       </div>
     </div>
     <div class="col-md-3">
@@ -117,7 +122,7 @@
   <div class="row">
     <div class="col-md-12">
     <div class="form-group">
-      <input class="form-control" type="text" name="operations_history" maxlength="1000" id="id_operations_history" placeholder="Operations History"/>
+      <textarea class="form-control" type="text" name="operations_history" maxlength="1000" rows=4 id="id_operations_history" placeholder="Operations History"></textarea>
     </div>
     </div>
   </div>
