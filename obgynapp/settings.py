@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dashboard.apps.DashboardConfig',
     'patients.apps.PatientsConfig',
     'records.apps.RecordsConfig',
     'django.contrib.admin',
@@ -119,5 +120,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "obgynapp/static"),)
 STATIC_URL = '/static/'

@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include('dashboard.urls')),
 	path('patients/', include('patients.urls')),
     path('patients/<int:patient_id>/records/', include('records.urls')),
+
     path('admin/', admin.site.urls),
 ]
