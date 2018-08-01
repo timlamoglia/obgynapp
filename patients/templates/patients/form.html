@@ -1,3 +1,5 @@
+{% extends 'patients/base.html' %}
+{% block innerbody %}
 <h1>
 	{% if 'new'	in request.path %}
 	New Patient
@@ -6,6 +8,67 @@
 	{% endif %}
 </h1>
 <form method="post">{% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" value="Submit" />
+	<!-- {{ form.as_p }} -->
+<input type="text" name="name" maxlength="100" required id="id_name" />
+
+<input type="date" name="birth_date" required id="id_birth_date" /></p>
+<label for="id_sex">Sex:</label> <select name="sex" required id="id_sex">
+  <option value="" selected>---------</option>
+
+  <option value="MALE">Male</option>
+
+  <option value="FEMALE">Female</option>
+
+</select></p>
+<label for="id_status">Status:</label> <select name="status" required id="id_status">
+  <option value="" selected>---------</option>
+
+  <option value="SINGLE">Single</option>
+
+  <option value="MARRIED">Married</option>
+
+  <option value="WIDOWED">Widowed</option>
+
+  <option value="DIVORCED">Divorced</option>
+
+  <option value="SEPARATED">Separated</option>
+
+</select></p>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <input class="form-control" type="text" name="address" maxlength="200" id="id_address" placeholder="Address" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <input class="form-control" type="number" name="g" id="id_g" placeholder="G" />
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <input class="form-control" type="number" name="g" id="id_g" placeholder="G" />
+      </div>
+    </div>
+  </div>
+
+  <label for="id_p">P:</label> <input class="form-control" type="number" name="p" id="id_p" />
+  <label for="id_a1">A1:</label> <input class="form-control" type="number" name="a1" id="id_a1" />
+  <label for="id_a2">A2:</label> <input class="form-control" type="number" name="a2" id="id_a2" />
+  <label for="id_a3">A3:</label> <input class="form-control" type="number" name="a3" id="id_a3" />
+  <label for="id_a4">A4:</label> <input class="form-control" type="number" name="a4" id="id_a4" />
+  <label for="id_phone">Phone:</label> <input class="form-control" type="text" name="phone" maxlength="20" id="id_phone" />
+  <label for="id_religion">Religion:</label> <input class="form-control" type="text" name="religion" maxlength="50" id="id_religion" />
+  <label for="id_operations_history">Operations history:</label> <input class="form-control" type="text" name="operations_history" maxlength="1000" id="id_operations_history" />
+  <label for="id_allergies_history">Allergies history:</label> <input class="form-control" type="text" name="allergies_history" maxlength="1000" id="id_allergies_history" />
+	<input class="form-control" type="submit" value="Submit" />
 </form>
+
+{% endblock %}

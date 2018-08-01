@@ -32,6 +32,6 @@ Allergies History: {{ patient.allergies_history }}
         location.href = "{% url 'records:index' patient.id %}";
     };
     document.getElementById("ViewAllPatientsButton").onclick = function () {
-        location.href = "{% url 'patients:index' %}";
+        location.href = "{% url 'patients:patients' %}";
     };
 </script>

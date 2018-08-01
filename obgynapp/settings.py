@@ -71,6 +71,11 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
 WSGI_APPLICATION = 'obgynapp.wsgi.application'
 
 
@@ -103,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -122,3 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "obgynapp/static"),)
 STATIC_URL = '/static/'
+
+# Authentication variables
+LOGIN_REDIRECT_URL = '/patients/'
