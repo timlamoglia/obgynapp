@@ -1,6 +1,6 @@
 {% extends 'patients/base.html' %}
 {% block innerbody %}
-<h1>
+<h1 class="display-3 text-white">
 	{% if 'new'	in request.path %}
 	New Patient
 	{% else %}
@@ -29,7 +29,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
           </div>
-          <input class="form-control datepicker" placeholder="Select date" type="text" name="birth_date" required id="id_birth_date" 
+          <input class="form-control datepicker" placeholder="Birthdate" type="text" name="birth_date" required id="id_birth_date" 
           {% if patient.birth_date %}
           value="{{ patient.birth_date }}"
           {% endif %}
@@ -166,22 +166,14 @@
   <div class="row">
     <div class="col-md-12">
     <div class="form-group">
-      <textarea class="form-control" type="text" name="operations_history" maxlength="1000" rows=4 id="id_operations_history" placeholder="Operations History">
-      {% if patient.operations_history %}
-      {{ patient.operations_history }}
-      {% endif %}
-      </textarea>
+      <textarea class="form-control" type="text" name="operations_history" maxlength="1000" rows=4 id="id_operations_history" placeholder="Operations History">{% if patient.operations_history %}{{ patient.operations_history }}{% endif %}</textarea>
     </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
     <div class="form-group">
-      <textarea class="form-control" type="text" name="allergies_history" maxlength="1000" rows=4 id="id_allergies_history" placeholder="Allergies History">
-      {% if patient.allergies_history %}
-      {{ patient.allergies_history }}
-      {% endif %}
-      </textarea>
+      <textarea class="form-control" type="text" name="allergies_history" maxlength="1000" rows=4 id="id_allergies_history" placeholder="Allergies History">{% if patient.allergies_history %}{{ patient.allergies_history }}{% endif %}</textarea>
     </div>
     </div>
   </div>

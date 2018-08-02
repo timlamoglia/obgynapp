@@ -7,22 +7,22 @@ from .models import Record, Patient
 
 # Create your views here.
 
-class DateInput(forms.DateInput):
-	input_type = 'date'
+# class DateInput(forms.DateInput):
+# 	input_type = 'date'
 
 class RecordForm(ModelForm):
 	class Meta:
 		model = Record
 		fields = '__all__'
-		widgets = {
-			#'patient': forms.TextInput(attrs={'disabled': True, 'hidden': True}),
-			'patient': forms.HiddenInput(),
-			'visit_date': DateInput(),
-			'lmp': DateInput(),
-			'edc': DateInput(),
-			'aog': forms.TextInput(),
-			'return_date': DateInput()
-		}
+		# widgets = {
+		# 	#'patient': forms.TextInput(attrs={'disabled': True, 'hidden': True}),
+		# 	'patient': forms.HiddenInput(),
+		# 	'visit_date': DateInput(),
+		# 	'lmp': DateInput(),
+		# 	'edc': DateInput(),
+		# 	'aog': forms.TextInput(),
+		# 	'return_date': DateInput()
+		# }
 
 def index(request, patient_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
@@ -50,6 +50,9 @@ def edit(request, patient_id, record_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	record = get_object_or_404(Record, pk=record_id)
 	form = RecordForm(request.POST or None, instance=record)
+	record.visit_date = record.visit_date.strftime('%m/%d/%Y')
+	record.lmp = record.lmp.strftime('%m/%d/%Y')
+	record.edc = record.edc.strftime('%m/%d/%Y')
 	if form.is_valid():
 		form.save()
 		return HttpResponseRedirect(reverse('records:show', args=(patient_id, record.id)))

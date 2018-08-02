@@ -1,21 +1,23 @@
+{% extends 'patients/base.html' %}
+{% block innerbody %}
 {% for record in record_list %}
 <!-- <a href="/patients/{{ record.patient.id }}/records/{{ record.id }}">{{ record }}</a> -->
 {% endfor %}
 
-<h1>Records of {{ patient.name }}</h1>
+<h1 class="display-3 text-white">Records of {{ patient.name }}</h1>
 
-<table border="1">
+<table class="table">
 	<thead>
 		<tr>
-			<th>Visit Date</th>
-			<th>View</th>
+			<th class="text-white">Visit Date</th>
+			<th class="text-white">View</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for record in record_list %}
 		<tr>
-			<td>{{ record.visit_date }}</td>
-			<td><a href="{% url 'records:show' patient.id record.id %}">view</a></td>
+			<td class="text-white">{{ record.visit_date }}</td>
+			<td class="text-white"><a class="text-white" href="{% url 'records:show' patient.id record.id %}">view</a></td>
 			<!-- <td><a href="{% url 'records:edit' patient.id record.id %}">edit</a></td> -->
     		<!-- <td><a href="{% url 'patients:delete' patient.id %}">delete</a></td> -->
     	</tr>
@@ -23,10 +25,11 @@
 	</tbody>
 </table>
 
-<button id="NewButton" class="float-left submit-button" >Add New Record</button>
+<button id="NewButton" class="btn btn-primary float-left submit-button" >Add New Record</button>
 
 <script type="text/javascript">
     document.getElementById("NewButton").onclick = function () {
         location.href = "{% url 'records:new' patient.id %}";
     };
 </script>
+{% endblock %}

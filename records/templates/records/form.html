@@ -1,57 +1,179 @@
-{% load staticfiles %}
-
-<body>
-	<h1>
-		{% if 'new'	in request.path %}
-		New Record
-		{% else %}
-		Edit Record
-		{% endif %}
-	</h1>
-	Patient: {{ patient.name }}
-
-	<form method="post">{% csrf_token %}
-		<table>
-			{{ form.as_table }}
-		</table>
-		<button type="button" id="Compute" class="float-left submit-button" >Compute EDC/AOG</button>
-		<input type="submit" value="Submit" />
-	</form>
-
-	{% if 'edit' in request.path %}
-	<button id="ViewRecord" class="float-left submit-button" >View Record</button>
-	<script type="text/javascript">
-	    document.getElementById("ViewRecord").onclick = function () {
-			location.href = "{% url 'records:show' patient.id record.id %}";
-	    };
-	</script>
+{% extends 'patients/base.html' %}
+{% block innerbody %}
+<h1 class="display-3 text-white">
+	{% if 'new'	in request.path %}
+	New Record
 	{% else %}
-	<button id="ViewAllButton" class="float-left submit-button" >View All Records</button>
-	<script type="text/javascript">
-	    document.getElementById("ViewAllButton").onclick = function () {
-	        location.href = "{% url 'records:index' patient.id %}";
-	    };
-	</script>
-
+	Edit Record
 	{% endif %}
+</h1>
 
-	<script type="text/javascript">
-	    var lmpInput = document.getElementById('id_lmp');
-		// var edcInput = document.getElementById('id_edc');
-		var visitDateInput = document.getElementById('id_visit_date');
-	    document.getElementById("Compute").onclick = function () {
-			// alert("Solving the AOG...");
-			var oneDay = 24*60*60*1000;
-			var edcDays = 24*60*60*1000*280;
-			// alert(Date.parse(edcInput.value));
-			var edc = new Date(Date.parse(lmpInput.value) + edcDays);
-			alert(edc.toISOString().slice(0,10));
-			var aog = (Math.round(Math.abs((edc.getTime() - Date.parse(visitDateInput.value))/(oneDay))));
-			aog = Math.round((aog/7)*10) / 10
-			alert(aog);
-			document.getElementById("id_edc").value = edc.toISOString().slice(0,10);
-			document.getElementById("id_aog").value = aog;
-		}
-	</script>
-	<script type="text/javascript"  src="{% static 'records/my.js' %}"></script>
-</body>
+<form method="post">{% csrf_token %}
+	<!-- <table>
+		{{ form.as_table }}
+	</table> -->
+	<div class="row">
+		<div class="col-12 col-md-8">
+			<div class="form-group">
+				<input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" value="{{ patient }}" disabled />
+			</div>
+		</div>
+			
+		<div class="col-6 col-md-4">
+			<div class="form-group">
+			    <div class="input-group input-group-alternative">
+			    	<div class="input-group-prepend">
+			    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+			    	</div>
+			    	<input class="form-control datepicker" placeholder="Visit Date" type="text" name="visit_date" required id="id_record_date" 
+			    	{% if record.visit_date %}
+			    	value="{{ record.visit_date }}"
+			     	{% endif %}
+			     	/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6 col-md-4">
+			<div class="form-group">
+				<input class="form-control" type="number" name="bp" id="id_bp" placeholder="BP" 
+			    {% if record.bp %}
+			    value="{{ record.bp }}"
+			    {% endif %}
+			    />
+			</div>
+		</div>
+		<div class="col-6 col-md-4">
+			<div class="form-group">
+				<input class="form-control" type="number" name="fh" id="id_fh" placeholder="FH" 
+			    {% if record.fh %}
+			    value="{{ record.fh }}"
+			    {% endif %}
+			    />
+			</div>
+		</div>
+		<div class="col-6 col-md-4">
+			<div class="form-group">
+				<input class="form-control" type="number" name="fht" id="id_fht" placeholder="FHT" 
+			    {% if record.fht %}
+			    value="{{ record.fht }}"
+			    {% endif %}
+			    />
+			</div>
+		</div>
+	</div>
+
+<div class="row">
+	<div class="col-6 col-md-4">
+		<div class="form-group">
+		    <div class="input-group input-group-alternative">
+		    	<div class="input-group-prepend">
+		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+		    	</div>
+		    	<input class="form-control datepicker" placeholder="LMP" type="text" name="lmp" required id="id_lmp" 
+		    	{% if record.lmp %}
+		    	value="{{ record.lmp }}"
+		     	{% endif %}
+		     	/>
+			</div>
+		</div>
+	</div>
+	<div class="col-6 col-md-4">
+		<div class="form-group">
+			<button type="button" id="Compute" class="btn btn-primary" >Compute EDC/AOG</button>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6 col-md-4">
+		<div class="form-group">
+		    <div class="input-group input-group-alternative">
+		    	<div class="input-group-prepend">
+		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+		    	</div>
+		    	<input class="form-control datepicker" placeholder="EDC" type="text" name="edc" required id="id_edc" 
+		    	{% if record.edc %}
+		    	value="{{ record.edc }}"
+		     	{% endif %}
+		     	/>
+			</div>
+		</div>
+	</div>
+	<div class="col-6 col-md-4">
+		<div class="form-group">
+			<input class="form-control" type="number" name="aog" id="id_aog" placeholder="AOG" 
+		    {% if record.aog %}
+		    value="{{ record.aog }}"
+		    {% endif %}
+		    />
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<textarea class="form-control" type="text" name="diagnosis" maxlength="1000" rows=4 id="id_diagnosis" placeholder="Diagnosis">{% if record.diagnosis %}{{ record.diagnosis }}{% endif %}</textarea>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+  			<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder="Medication">{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6 col-md-4">
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" value="Submit" />Submit</button>
+		</div>
+	</div>
+	<div class="col-6 col-md-4"></div>
+	<div class="col-6 col-md-4">
+		<div class="form-group">
+			{% if 'edit' in request.path %}
+			<button type="button" id="ViewRecord" class="btn btn-primary" >View Record</button>
+			<script type="text/javascript">
+			    document.getElementById("ViewRecord").onclick = function () {
+					location.href = "{% url 'records:show' patient.id record.id %}";
+			    };
+			</script>
+			{% else %}
+			<button type="button" id="ViewAllButton" class="btn btn-primary" >View All ReWcords</button>
+			<script type="text/javascript">
+			    document.getElementById("ViewAllButton").onclick = function () {
+			        location.href = "{% url 'records:index' patient.id %}";
+			    };
+			</script>
+			{% endif %}
+		</div>
+	</div>
+</div>
+</form>
+
+<script type="text/javascript">
+    var lmpInput = document.getElementById('id_lmp');
+	// var edcInput = document.getElementById('id_edc');
+	var visitDateInput = document.getElementById('id_visit_date');
+    document.getElementById("Compute").onclick = function () {
+		// alert("Solving the AOG...");
+		var oneDay = 24*60*60*1000;
+		var edcDays = 24*60*60*1000*280;
+		// alert(Date.parse(edcInput.value));
+		var edc = new Date(Date.parse(lmpInput.value) + edcDays);
+		alert(edc.toISOString().slice(0,10));
+		var aog = (Math.round(Math.abs((edc.getTime() - Date.parse(visitDateInput.value))/(oneDay))));
+		aog = Math.round((aog/7)*10) / 10
+		alert(aog);
+		document.getElementById("id_edc").value = "edc.toISOString().slice(0,10)";
+		document.getElementById("id_aog").value = aog;
+	}
+</script>
+
+{% endblock %}

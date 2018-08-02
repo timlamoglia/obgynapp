@@ -1,18 +1,46 @@
-<h1>Record Details</h1>
-{{ patient.name }}
-{{ record.visit_date }}
-{{ record.bp }}
-{{ record.fh }}
-{{ record.fht }}
-{{ record.lmp }}
-{{ record.edc }}
-{{ record.aog }}
-{{ record.diagnosis }}
-{{ record.medication }}
-{{ record.return_date }}
-<button id="EditButton" class="float-left submit-button" >Edit</button>
-<button id="DeleteButton" class="float-left submit-button" >Delete</button>
-<button id="ViewAllButton" class="float-left submit-button" >View All Records</button>
+{% extends 'patients/base.html' %}
+{% block innerbody %}
+<h1 class="display-3 text-white">Record Details</h1>
+<div class="table text-white">
+	<table>
+		<tr>
+			<td>Name: {{ patient.name }}</td>
+		</tr>
+		<tr>
+			<td>Visit Date: {{ record.visit_date }}</td>
+		</tr>
+		<tr>
+			<td>BP: {{ record.bp }}</td>
+		</tr>
+		<tr>
+			<td>FH: {{ record.fh }}</td>
+		</tr>
+		<tr>
+			<td>FHT: {{ record.fht }}</td>
+		</tr>
+		<tr>
+			<td>LMP: {{ record.lmp }}</td>
+		</tr>
+		<tr>
+			<td>EDC: {{ record.edc }}</td>
+		</tr>
+		<tr>
+			<td>AOG: {{ record.aog }}</td>
+		</tr>
+		<tr>
+			<td>Diagnosis: {{ record.diagnosis }}</td>
+		</tr>
+		<tr>
+			<td>Medication: {{ record.medication }}</td>
+		</tr>
+		<tr>
+			<td>Return Date: {{ record.return_date }}</td>
+		</tr>
+	</table>
+</div>
+<button id="EditButton" class="btn btn-primary" >Edit</button>
+<button id="DeleteButton" class="btn btn-primary" >Delete</button>
+<button id="ViewAllButton" class="btn btn-primary" >View All Records</button>
 
 <script type="text/javascript">
     document.getElementById("EditButton").onclick = function () {
@@ -25,3 +53,4 @@
         location.href = "{% url 'records:index' patient.id %}";
     };
 </script>
+{% endblock %}
