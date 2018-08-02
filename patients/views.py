@@ -43,10 +43,11 @@ def new(request):
 def edit(request, patient_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	form = PatientForm(request.POST or None, instance=patient)
+	patient.birth_date = patient.birth_date.strftime('%m/%d/%Y')
 	if form.is_valid():
 		form.save()
 		return redirect('patients:patients')
-	return render(request, 'patients/form.html', {'form': form})
+	return render(request, 'patients/form.html', {'form': form, 'patient': patient})
 
 @login_required(login_url='/')
 def delete(request, patient_id):

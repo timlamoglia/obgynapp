@@ -13,7 +13,11 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name"/>
+        <input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" 
+        {% if patient.id %}
+        value="{{ patient.name }}"
+        {% endif %}
+        />
       </div>
     </div>
   </div>
@@ -25,7 +29,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
           </div>
-          <input class="form-control datepicker" placeholder="Select date" type="text" name="birth_date" required id="id_birth_date" />
+          <input class="form-control datepicker" placeholder="Select date" type="text" name="birth_date" required id="id_birth_date" 
+          {% if patient.birth_date %}
+          value="{{ patient.birth_date }}"
+          {% endif %}
+          />
         </div>
       </div>
     </div>
@@ -33,11 +41,16 @@
       <div class="form-group">
         <select name="sex" class="custom-select" required id="id_sex">
           <option value="" selected>Sex</option>
-
-          <option value="MALE">Male</option>
-
-          <option value="FEMALE">Female</option>
-
+          <option value="MALE"
+          {% if patient.sex == "male" %}
+          selected
+          {% endif %}
+          >Male</option>
+          <option value="FEMALE"
+          {% if patient.sex == "female" %}
+          selected
+          {% endif %}
+          >Female</option>
         </select>
       </div>
     </div>
@@ -45,15 +58,10 @@
       <div class="form-group">
         <select name="status" class="custom-select" required id="id_status">
           <option value="" selected>Status</option>
-
           <option value="SINGLE">Single</option>
-
           <option value="MARRIED">Married</option>
-
           <option value="WIDOWED">Widowed</option>
-
           <option value="DIVORCED">Divorced</option>
-
           <option value="SEPARATED">Separated</option>
       </select>
       </div>
@@ -65,7 +73,11 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <input class="form-control" type="text" name="address" maxlength="200" id="id_address" placeholder="Address" />
+        <input class="form-control" type="text" name="address" maxlength="200" id="id_address" placeholder="Address" 
+        {% if patient.address %}
+        value="{{ patient.address }}"
+        {% endif %}
+        />
       </div>
     </div>
   </div>
@@ -73,12 +85,20 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="number" name="g" id="id_g" placeholder="G" />
+        <input class="form-control" type="number" name="g" id="id_g" placeholder="G" 
+        {% if patient.g %}
+        value="{{ patient.g }}"
+        {% endif %}
+        />
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="number" name="p" id="id_p" placeholder="P" />
+        <input class="form-control" type="number" name="p" id="id_p" placeholder="P" 
+        {% if patient.p %}
+        value="{{ patient.p }}"
+        {% endif %}
+        />
       </div>
     </div>
   </div>
@@ -86,22 +106,38 @@
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-         <input class="form-control" type="number" name="a1" id="id_a1" placeholder="A1"/>
+        <input class="form-control" type="number" name="a1" id="id_a1" placeholder="A1" 
+        {% if patient.a1 %}
+        value="{{ patient.a1 }}"
+        {% endif %}
+        />
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
-         <input class="form-control" type="number" name="a2" id="id_a2" placeholder="A2"/>
+         <input class="form-control" type="number" name="a2" id="id_a2" placeholder="A2" 
+         {% if patient.a2 %}
+        value="{{ patient.a2 }}"
+        {% endif %}
+        />
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
-         <input class="form-control" type="number" name="a3" id="id_a3" placeholder="A3"/>
+        <input class="form-control" type="number" name="a3" id="id_a3" placeholder="A3" 
+         {% if patient.a3 %}
+        value="{{ patient.a3 }}"
+        {% endif %}
+        />
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
-         <input class="form-control" type="number" name="a4" id="id_a4" placeholder="A4"/>
+        <input class="form-control" type="number" name="a4" id="id_a4" placeholder="A4" 
+        {% if patient.a4 %}
+        value="{{ patient.a4 }}"
+        {% endif %}
+        />
       </div>
     </div>
   </div>
@@ -109,12 +145,20 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="text" name="phone" maxlength="20" id="id_phone" placeholder="Phone"/>
+        <input class="form-control" type="text" name="phone" maxlength="20" id="id_phone" placeholder="Phone" 
+        {% if patient.phone %}
+        value="{{ patient.phone }}"
+        {% endif %}
+        />
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="text" name="religion" maxlength="50" id="id_religion" placeholder="Religion"/>
+        <input class="form-control" type="text" name="religion" maxlength="50" id="id_religion" placeholder="Religion" 
+        {% if patient.religion %}
+        value="{{ patient.religion }}"
+        {% endif %}
+        />
       </div>
     </div>
   </div>
@@ -122,14 +166,22 @@
   <div class="row">
     <div class="col-md-12">
     <div class="form-group">
-      <textarea class="form-control" type="text" name="operations_history" maxlength="1000" rows=4 id="id_operations_history" placeholder="Operations History"></textarea>
+      <textarea class="form-control" type="text" name="operations_history" maxlength="1000" rows=4 id="id_operations_history" placeholder="Operations History">
+      {% if patient.operations_history %}
+      {{ patient.operations_history }}
+      {% endif %}
+      </textarea>
     </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
     <div class="form-group">
-      <textarea class="form-control" type="text" name="allergies_history" maxlength="1000" rows=4 id="id_allergies_history" placeholder="Allergies History"></textarea>
+      <textarea class="form-control" type="text" name="allergies_history" maxlength="1000" rows=4 id="id_allergies_history" placeholder="Allergies History">
+      {% if patient.allergies_history %}
+      {{ patient.allergies_history }}
+      {% endif %}
+      </textarea>
     </div>
     </div>
   </div>
