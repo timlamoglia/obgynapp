@@ -85,7 +85,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="number" name="g" id="id_g" placeholder="G" 
+        <input class="form-control" type="number" name="g" id="id_g" placeholder="G" required 
         {% if patient.g %}
         value="{{ patient.g }}"
         {% endif %}
@@ -94,7 +94,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="number" name="p" id="id_p" placeholder="P" 
+        <input class="form-control" type="number" name="p" id="id_p" placeholder="P" required
         {% if patient.p %}
         value="{{ patient.p }}"
         {% endif %}

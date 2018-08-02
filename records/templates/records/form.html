@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-12 col-md-8">
 			<div class="form-group">
-				<input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" value="{{ patient }}" disabled />
+				<input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" value="{{ patient }}" />
 			</div>
 		</div>
 			
@@ -25,7 +25,7 @@
 			    	<div class="input-group-prepend">
 			    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 			    	</div>
-			    	<input class="form-control datepicker" placeholder="Visit Date" type="text" name="visit_date" required id="id_record_date" 
+			    	<input class="form-control datepicker" placeholder="Visit Date" type="text" name="visit_date" required id="id_visit_date" 
 			    	{% if record.visit_date %}
 			    	value="{{ record.visit_date }}"
 			     	{% endif %}
@@ -38,7 +38,7 @@
 	<div class="row">
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="bp" id="id_bp" placeholder="BP" 
+				<input class="form-control" type="number" name="bp" id="id_bp" placeholder="BP" required  
 			    {% if record.bp %}
 			    value="{{ record.bp }}"
 			    {% endif %}
@@ -47,7 +47,7 @@
 		</div>
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="fh" id="id_fh" placeholder="FH" 
+				<input class="form-control" type="number" name="fh" id="id_fh" placeholder="FH" required 
 			    {% if record.fh %}
 			    value="{{ record.fh }}"
 			    {% endif %}
@@ -56,7 +56,7 @@
 		</div>
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="fht" id="id_fht" placeholder="FHT" 
+				<input class="form-control" type="number" name="fht" id="id_fht" placeholder="FHT" required 
 			    {% if record.fht %}
 			    value="{{ record.fht }}"
 			    {% endif %}
@@ -104,7 +104,7 @@
 	</div>
 	<div class="col-6 col-md-4">
 		<div class="form-group">
-			<input class="form-control" type="number" name="aog" id="id_aog" placeholder="AOG" 
+			<input class="form-control" type="number" name="aog" id="id_aog" placeholder="AOG" required   
 		    {% if record.aog %}
 		    value="{{ record.aog }}"
 		    {% endif %}
@@ -145,7 +145,7 @@
 			    };
 			</script>
 			{% else %}
-			<button type="button" id="ViewAllButton" class="btn btn-primary" >View All ReWcords</button>
+			<button type="button" id="ViewAllButton" class="btn btn-primary" >View All Records</button>
 			<script type="text/javascript">
 			    document.getElementById("ViewAllButton").onclick = function () {
 			        location.href = "{% url 'records:index' patient.id %}";
@@ -165,13 +165,17 @@
 		// alert("Solving the AOG...");
 		var oneDay = 24*60*60*1000;
 		var edcDays = 24*60*60*1000*280;
+		var options = { day:'numeric', month:'numeric', year:'numeric' };
 		// alert(Date.parse(edcInput.value));
 		var edc = new Date(Date.parse(lmpInput.value) + edcDays);
-		alert(edc.toISOString().slice(0,10));
-		var aog = (Math.round(Math.abs((edc.getTime() - Date.parse(visitDateInput.value))/(oneDay))));
+		edcFix = ('0' + (edc.getMonth()+1)).slice(-2) + '/' + ('0' + edc.getDate()).slice(-2) + '/' + edc.getFullYear();
+		document.getElementById("id_edc").value = edcFix;
+		// var aog = (Math.round(Math.abs((edcFix.getTime() - Date.parse(visitDateInput.value))/(oneDay))));
+		alert(Date.parse(visitDateInput.value));
+		var aog = (Math.round(Math.abs(Date.parse(edcFix) - Date.parse(visitDateInput.value))/(oneDay)));
 		aog = Math.round((aog/7)*10) / 10
 		alert(aog);
-		document.getElementById("id_edc").value = "edc.toISOString().slice(0,10)";
+		// document.getElementById("id_edc").value = edc.toISOString().slice(0,10);
 		document.getElementById("id_aog").value = aog;
 	}
 </script>
