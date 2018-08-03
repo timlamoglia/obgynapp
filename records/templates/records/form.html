@@ -25,7 +25,7 @@
 			    	<div class="input-group-prepend">
 			    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 			    	</div>
-			    	<input class="form-control datepicker" placeholder="Visit Date" type="text" name="visit_date" required id="id_visit_date" 
+			    	<input class="form-control datepicker" placeholder="Visit Date" type="text" name="visit_date" required id="id_visit_date" autocomplete="off" 
 			    	{% if record.visit_date %}
 			    	value="{{ record.visit_date }}"
 			     	{% endif %}
@@ -38,7 +38,7 @@
 	<div class="row">
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="bp" id="id_bp" placeholder="BP" required  
+				<input class="form-control" type="number" name="bp" id="id_bp" placeholder="BP" required autocomplete="off"  
 			    {% if record.bp %}
 			    value="{{ record.bp }}"
 			    {% endif %}
@@ -47,7 +47,7 @@
 		</div>
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="fh" id="id_fh" placeholder="FH" required 
+				<input class="form-control" type="number" name="fh" id="id_fh" placeholder="FH" required autocomplete="off" 
 			    {% if record.fh %}
 			    value="{{ record.fh }}"
 			    {% endif %}
@@ -56,7 +56,7 @@
 		</div>
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="fht" id="id_fht" placeholder="FHT" required 
+				<input class="form-control" type="number" name="fht" id="id_fht" placeholder="FHT" required autocomplete="off" 
 			    {% if record.fht %}
 			    value="{{ record.fht }}"
 			    {% endif %}
@@ -72,7 +72,7 @@
 		    	<div class="input-group-prepend">
 		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 		    	</div>
-		    	<input class="form-control datepicker" placeholder="LMP" type="text" name="lmp" required id="id_lmp" 
+		    	<input class="form-control datepicker" placeholder="LMP" type="text" name="lmp" required id="id_lmp" autocomplete="off" 
 		    	{% if record.lmp %}
 		    	value="{{ record.lmp }}"
 		     	{% endif %}
@@ -94,7 +94,7 @@
 		    	<div class="input-group-prepend">
 		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 		    	</div>
-		    	<input class="form-control datepicker" placeholder="EDC" type="text" name="edc" required id="id_edc" 
+		    	<input class="form-control datepicker" placeholder="EDC" type="text" name="edc" required id="id_edc" autocomplete="off" 
 		    	{% if record.edc %}
 		    	value="{{ record.edc }}"
 		     	{% endif %}
@@ -116,14 +116,14 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			<textarea class="form-control" type="text" name="diagnosis" maxlength="1000" rows=4 id="id_diagnosis" placeholder="Diagnosis">{% if record.diagnosis %}{{ record.diagnosis }}{% endif %}</textarea>
+			<textarea class="form-control" type="text" name="diagnosis" maxlength="1000" rows=4 id="id_diagnosis" placeholder="Diagnosis" autocomplete="off" >{% if record.diagnosis %}{{ record.diagnosis }}{% endif %}</textarea>
 		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-  			<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder="Medication">{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
+  			<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder="Medication" autocomplete="off" >{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
 		</div>
 	</div>
 </div>
