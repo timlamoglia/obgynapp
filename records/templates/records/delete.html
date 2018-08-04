@@ -1,5 +1,26 @@
-<h1>Record Delete</h1>
+{% extends 'patients/base.html' %}
+{% block innerbody %}
+<!-- <h1 class="display-3 text-white">Record Delete</h1> -->
 <form method="post">{% csrf_token %}
-	Are you sure you want to delete {{ patient.name }}'s {{ record.visit_date }} record?
-	<input type="submit" value="Submit" />
+	<div class="row">
+		<div class="col-12 col-md-8">
+			<div class="alert alert-warning" role="alert">
+		    	<span class="alert-inner--text">Are you sure you want to delete {{ patient.name }}'s record on {{ record.visit_date }}?</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6 col-md-4">
+			<input type="submit" value="Delete" class="btn btn-warning" />
+			<button type="button" id="CancelButton" class="btn btn-secondary">Cancel</button>
+		</div>
+	</div>
 </form>
+
+<script type="text/javascript">
+    document.getElementById("CancelButton").onclick = function () {
+        location.href = "{% url 'records:show' patient.id record.id %}";
+    };
+</script>
+
+{% endblock %}
