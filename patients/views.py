@@ -1,23 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.forms import ModelForm
 from django.template import loader
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.http import HttpResponse
 
 from patients.models import Patient
-
-# Create your views here.
 
 # class DateInput(forms.DateInput):
 # 	input_type = 'date'
 
-class PatientForm(ModelForm):
-	class Meta:
-		model = Patient
-		fields = '__all__'
-		# widgets = {
-		# 	'birth_date': DateInput(),
-		# }
+
 @login_required(login_url='/')
 def index(request):
 	patient_list = Patient.objects.all()
@@ -25,6 +18,21 @@ def index(request):
 		'patient_list': patient_list
 	}
 	return render(request, 'patients/patients.html', context)
+
+class PatientListView(ListView):
+	model = Patient
+	template_name = "patients/patients.html"
+	page_template = "patients/patients.html"
+	context_object_name = "patient_list"
+
+	def get_queryset(self):
+		query = self.request.GET.get('q')
+
+		if query:
+			return Patient.objects.filter(name__icontains=query)
+		else:
+			print(Patient.objects.all())
+			return Patient.objects.all()
 
 @login_required(login_url='/')
 def show(request, patient_id):

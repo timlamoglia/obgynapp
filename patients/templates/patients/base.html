@@ -21,19 +21,28 @@
             </div>
           </div>
           <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-            <li class="nav-item dropdown">
+            <li class="nav-item">
               <a href="/patients/" class="nav-link" role="button">
                 <span class="nav-link-inner--text">Patients</span>
               </a>
             </li>
             {% if patient.id %}
-            <li class="nav-item dropdown">
+            <li class="nav-item">
               <a href="{% url 'records:index' patient.id %}" class="nav-link" href="#" role="button">
                 <span class="nav-link-inner--text">Records</span>
               </a>
             </li>
             {% else %}
-            Search bar here
+              <li class="nav-item">
+                <form method="GET" action="/patients">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                    </div>
+                      <input class="form-control" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search..."/>
+                  </div>
+                </form>
+              </li>
             {% endif %}
           </ul>
 
