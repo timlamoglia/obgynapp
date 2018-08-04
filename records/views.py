@@ -42,7 +42,6 @@ def new(request, patient_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	form = RecordForm(request.POST or None, initial={'patient': patient})
 	if form.is_valid():
-		form.patient = patient
 		record = form.save()
 		return HttpResponseRedirect(reverse('records:show', args=(patient_id, record.id)))
 	return render(request, 'records/form.html', {'form': form, 'patient': patient})
@@ -54,6 +53,7 @@ def edit(request, patient_id, record_id):
 	record.visit_date = record.visit_date.strftime('%m/%d/%Y')
 	record.lmp = record.lmp.strftime('%m/%d/%Y')
 	record.edc = record.edc.strftime('%m/%d/%Y')
+	record.return_date = record.return_date.strftime('%m/%d/%Y')
 	if form.is_valid():
 		form.save()
 		return HttpResponseRedirect(reverse('records:show', args=(patient_id, record.id)))

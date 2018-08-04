@@ -15,15 +15,15 @@
     {% endfor %}
   </ul>
 {% endif %}
-
 <form method="post">{% csrf_token %}
 	<!-- <table>
 		{{ form.as_table }}
 	</table> -->
+	<input class="form-control" type="text" name="patient" maxlength="100" required id="id_patient" placeholder="Patient" value="{{ patient.id }}" hidden />
 	<div class="row">
 		<div class="col-12 col-md-8">
 			<div class="form-group">
-				<input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" value="{{ patient }}" />
+				<input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" value="{{ patient }}" disabled />
 			</div>
 		</div>
 			
@@ -112,7 +112,7 @@
 	</div>
 	<div class="col-6 col-md-4">
 		<div class="form-group">
-			<input class="form-control" type="number" name="aog" id="id_aog" placeholder="AOG" required   
+			<input class="form-control" type="number" name="aog" id="id_aog" placeholder="AOG" required step="0.01"   
 		    {% if record.aog %}
 		    value="{{ record.aog }}"
 		    {% endif %}
@@ -124,14 +124,14 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			<textarea class="form-control" type="text" name="diagnosis" maxlength="1000" rows=4 id="id_diagnosis" placeholder="Diagnosis" autocomplete="off" >{% if record.diagnosis %}{{ record.diagnosis }}{% endif %}</textarea>
+			<textarea class="form-control" type="text" name="diagnosis" maxlength="1000" rows=4 id="id_diagnosis" placeholder="Diagnosis" autocomplete="off" required >{% if record.diagnosis %}{{ record.diagnosis }}{% endif %}</textarea>
 		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-  			<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder="Medication" autocomplete="off" >{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
+  			<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder="Medication" autocomplete="off" required >{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
 		</div>
 	</div>
 </div>
