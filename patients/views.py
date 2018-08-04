@@ -4,20 +4,10 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.http import HttpResponse
+from django.db.models import Q
 
 from patients.models import Patient
 from .forms import PatientForm
-# class DateInput(forms.DateInput):
-# 	input_type = 'date'
-
-
-@login_required(login_url='/')
-def index(request):
-	patient_list = Patient.objects.all()
-	context = {
-		'patient_list': patient_list
-	}
-	return render(request, 'patients/patients.html', context)
 
 class PatientListView(ListView):
 	model = Patient
@@ -27,9 +17,13 @@ class PatientListView(ListView):
 
 	def get_queryset(self):
 		query = self.request.GET.get('q')
-
 		if query:
-			return Patient.objects.filter(name__icontains=query)
+			q_part,q_totals = Q(),Q()
+			for part in query.split():
+				q_part = q_part | Q(**{'name__icontains':part})
+			q_totals = q_totals | q_part
+			
+			return Patient.objects.filter(q_totals)
 		else:
 			print(Patient.objects.all())
 			return Patient.objects.all()
