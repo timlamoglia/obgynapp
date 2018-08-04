@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRe
 from django.forms import ModelForm
 from django.urls import reverse
 from django import forms
+from django.contrib.auth.decorators import login_required
 
 from .models import Record, Patient
 
@@ -24,6 +25,7 @@ class RecordForm(ModelForm):
 		# 	'return_date': DateInput()
 		# }
 
+@login_required(login_url='/')
 def index(request, patient_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	record_list = Record.objects.all()
@@ -33,11 +35,13 @@ def index(request, patient_id):
 	}
 	return render(request, 'records/index.html', context)
 
+@login_required(login_url='/')
 def show(request, patient_id, record_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	record = get_object_or_404(Record, pk=record_id)
 	return render(request, 'records/show.html', {'record': record, 'patient': patient})
 
+@login_required(login_url='/')
 def new(request, patient_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	form = RecordForm(request.POST or None, initial={'patient': patient})
@@ -46,6 +50,7 @@ def new(request, patient_id):
 		return HttpResponseRedirect(reverse('records:show', args=(patient_id, record.id)))
 	return render(request, 'records/form.html', {'form': form, 'patient': patient})
 
+@login_required(login_url='/')
 def edit(request, patient_id, record_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	record = get_object_or_404(Record, pk=record_id)
@@ -60,6 +65,7 @@ def edit(request, patient_id, record_id):
 	# print(form.errors)
 	return render(request, 'records/form.html', {'form': form, 'patient': patient, 'record': record})
 
+@login_required(login_url='/')
 def delete(request, patient_id, record_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	record = get_object_or_404(Record, pk=record_id)
