@@ -8,6 +8,14 @@
 	{% endif %}
 </h1>
 
+{% if form.errors %}
+  <ul>
+    {% for key,value in form.errors.items %} 
+      <li>{{ key|escape }} : {{ value|escape }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 <form method="post">{% csrf_token %}
 	<!-- <table>
 		{{ form.as_table }}
@@ -124,6 +132,22 @@
 	<div class="col-md-12">
 		<div class="form-group">
   			<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder="Medication" autocomplete="off" >{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-6 col-md-4">
+		<div class="form-group">
+		    <div class="input-group input-group-alternative">
+		    	<div class="input-group-prepend">
+		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+		    	</div>
+		    	<input class="form-control datepicker" placeholder="Return Date" type="text" name="return_date" required id="id_return_date" autocomplete="off" 
+		    	{% if record.return_date %}
+		    	value="{{ record.return_date }}"
+		     	{% endif %}
+		     	/>
+			</div>
 		</div>
 	</div>
 </div>

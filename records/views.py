@@ -42,6 +42,7 @@ def new(request, patient_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
 	form = RecordForm(request.POST or None, initial={'patient': patient})
 	if form.is_valid():
+		form.patient = patient
 		record = form.save()
 		return HttpResponseRedirect(reverse('records:show', args=(patient_id, record.id)))
 	return render(request, 'records/form.html', {'form': form, 'patient': patient})
@@ -56,6 +57,7 @@ def edit(request, patient_id, record_id):
 	if form.is_valid():
 		form.save()
 		return HttpResponseRedirect(reverse('records:show', args=(patient_id, record.id)))
+	# print(form.errors)
 	return render(request, 'records/form.html', {'form': form, 'patient': patient, 'record': record})
 
 def delete(request, patient_id, record_id):
