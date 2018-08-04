@@ -156,26 +156,7 @@
 	<div class="col-6 col-md-4">
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary" value="Submit" />Submit</button>
-		</div>
-	</div>
-	<div class="col-6 col-md-4"></div>
-	<div class="col-6 col-md-4">
-		<div class="form-group">
-			{% if 'edit' in request.path %}
-			<button type="button" id="ViewRecord" class="btn btn-primary" >View Record</button>
-			<script type="text/javascript">
-			    document.getElementById("ViewRecord").onclick = function () {
-					location.href = "{% url 'records:show' patient.id record.id %}";
-			    };
-			</script>
-			{% else %}
-			<button type="button" id="ViewAllButton" class="btn btn-primary" >View All Records</button>
-			<script type="text/javascript">
-			    document.getElementById("ViewAllButton").onclick = function () {
-			        location.href = "{% url 'records:index' patient.id %}";
-			    };
-			</script>
-			{% endif %}
+			<button type="button" id="CancelButton" class="btn btn-warning">Cancel</button>
 		</div>
 	</div>
 </div>
@@ -203,5 +184,19 @@
 		document.getElementById("id_aog").value = aog;
 	}
 </script>
+
+{% if 'new' in request.path %}
+<script type="text/javascript">
+    document.getElementById("CancelButton").onclick = function () {
+        location.href = "{% url 'records:index' patient.id %}";
+    };
+</script>
+{% else %}
+<script type="text/javascript">
+    document.getElementById("CancelButton").onclick = function () {
+        location.href = "{% url 'records:show' patient.id record.id %}";
+    };
+</script>
+{% endif %}
 
 {% endblock %}

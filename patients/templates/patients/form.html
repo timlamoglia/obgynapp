@@ -181,10 +181,18 @@
   <button type="button" id="CancelButton" class="btn btn-warning">Cancel</button>
 </form>
 
+{% if 'new' in request.path %}
+<script type="text/javascript">
+    document.getElementById("CancelButton").onclick = function () {
+        location.href = "{% url 'patients:patients' %}";
+    };
+</script>
+{% else %}
 <script type="text/javascript">
     document.getElementById("CancelButton").onclick = function () {
         location.href = "{% url 'patients:show' patient.id %}";
     };
 </script>
+{% endif %}
 
 {% endblock %}
