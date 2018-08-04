@@ -6,7 +6,7 @@ from django.views.generic import ListView
 from django.http import HttpResponse
 
 from patients.models import Patient
-
+from .forms import PatientForm
 # class DateInput(forms.DateInput):
 # 	input_type = 'date'
 
