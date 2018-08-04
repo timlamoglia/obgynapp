@@ -1,6 +1,17 @@
 {% extends 'patients/base.html' %}
 {% block innerbody %}
-<h1 class="display-3 text-white">Patient Details</h1>
+<table>
+    <tr>
+        <td><h1 class="display-3 text-white">Patient Details</h1></td>
+        <td>
+            <button id="ViewRecordsButton" class="btn btn-icon btn-3 btn-primary" type="button">
+                <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                <span class="btn-inner--text">View Records</span>
+            </button>
+        </td>
+    </tr>
+</table>
+
 <div class= "table text-white">
     <table>
         <tr>
@@ -46,9 +57,7 @@
 </div>
 
 <button id="EditButton" class="btn btn-primary" >Edit</button>
-<button id="DeleteButton" class="btn btn-primary" >Delete</button>
-<button id="ViewRecordsButton" class="btn btn-primary" >View Records</button>
-<button id="ViewAllPatientsButton" class="btn btn-primary" >View All Patients</button>
+<button id="DeleteButton" class="btn btn-warning" >Delete</button>
 
 <script type="text/javascript">
     document.getElementById("EditButton").onclick = function () {
@@ -59,9 +68,6 @@
     };
     document.getElementById("ViewRecordsButton").onclick = function () {
         location.href = "{% url 'records:index' patient.id %}";
-    };
-    document.getElementById("ViewAllPatientsButton").onclick = function () {
-        location.href = "{% url 'patients:patients' %}";
     };
 </script>
 {% endblock %}

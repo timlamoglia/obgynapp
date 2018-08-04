@@ -178,6 +178,13 @@
     </div>
   </div>
 	<button type="submit" class="btn btn-primary" value="Submit" />Submit</button>
+  <button type="button" id="CancelButton" class="btn btn-warning">Cancel</button>
 </form>
+
+<script type="text/javascript">
+    document.getElementById("CancelButton").onclick = function () {
+        location.href = "{% url 'patients:show' patient.id %}";
+    };
+</script>
 
 {% endblock %}
