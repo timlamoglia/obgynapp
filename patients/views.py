@@ -18,12 +18,13 @@ class PatientListView(ListView):
 	def get_queryset(self):
 		query = self.request.GET.get('q')
 		if query:
-			q_part,q_totals = Q(),Q()
-			for part in query.split():
-				q_part = q_part | Q(**{'name__icontains':part})
-			q_totals = q_totals | q_part
-			
-			return Patient.objects.filter(q_totals)
+			queries = query.split()
+			try:
+				q1 = Q(name__icontains=queries[0])
+				q2 = Q(name__icontains=queries[1])
+				return Patient.objects.filter(q1 & q2)
+			except IndexError:
+				return Patient.objects.filter(name__icontains=query)
 		else:
 			print(Patient.objects.all())
 			return Patient.objects.all()
