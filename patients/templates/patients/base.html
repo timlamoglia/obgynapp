@@ -26,11 +26,15 @@
                 <span class="nav-link-inner--text">Patients</span>
               </a>
             </li>
+            {% if patient.id %}
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link" href="#" role="button">
+              <a href="{% url 'records:index' patient.id %}" class="nav-link" href="#" role="button">
                 <span class="nav-link-inner--text">Records</span>
               </a>
             </li>
+            {% else %}
+            Search bar here
+            {% endif %}
           </ul>
 
           <ul class="navbar-nav align-items-lg-center ml-lg-auto">

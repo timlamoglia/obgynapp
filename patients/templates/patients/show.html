@@ -1,16 +1,6 @@
 {% extends 'patients/base.html' %}
 {% block innerbody %}
-<table>
-    <tr>
-        <td><h1 class="display-3 text-white">Patient Details</h1></td>
-        <td>
-            <button id="ViewRecordsButton" class="btn btn-icon btn-3 btn-primary" type="button">
-                <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
-                <span class="btn-inner--text">View Records</span>
-            </button>
-        </td>
-    </tr>
-</table>
+<h1 class="display-3 text-white">Patient Details</h1>
 
 <div class= "table text-white">
     <table>
@@ -58,6 +48,10 @@
 
 <button id="EditButton" class="btn btn-primary" >Edit</button>
 <button id="DeleteButton" class="btn btn-warning" >Delete</button>
+<button id="ViewRecordsButton" class="btn btn-icon btn-3 btn-primary" type="button">
+    <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+    <span class="btn-inner--text">View Records</span>
+</button>
 
 <script type="text/javascript">
     document.getElementById("EditButton").onclick = function () {
