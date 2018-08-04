@@ -20,7 +20,7 @@ class PatientListView(ListView):
 		if query:
 			q_part,q_totals = Q(),Q()
 			for part in query.split():
-				q_part = q_part | Q(**{'name__icontains':part})
+				q_part = q_part & Q(**{'name__icontains':part})
 			q_totals = q_totals | q_part
 			
 			return Patient.objects.filter(q_totals)
