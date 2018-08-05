@@ -28,7 +28,7 @@ class RecordForm(ModelForm):
 @login_required(login_url='/')
 def index(request, patient_id):
 	patient = get_object_or_404(Patient, pk=patient_id)
-	record_list = Record.objects.all()
+	record_list = patient.record_set.all().order_by('visit_date')
 	context = {
 		'patient': patient,
 		'record_list': record_list
@@ -62,7 +62,6 @@ def edit(request, patient_id, record_id):
 	if form.is_valid():
 		form.save()
 		return HttpResponseRedirect(reverse('records:show', args=(patient_id, record.id)))
-	# print(form.errors)
 	return render(request, 'records/form.html', {'form': form, 'patient': patient, 'record': record})
 
 @login_required(login_url='/')

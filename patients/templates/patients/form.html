@@ -7,17 +7,38 @@
 	Edit Patient
 	{% endif %}
 </h1>
+
 <form method="post">{% csrf_token %}
 	<!-- {{ form.as_p }} -->
-  
+
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" autocomplete="off" 
-        {% if patient.id %}
-        value="{{ patient.name }}"
-        {% endif %}
-        />
+        <label class="form-label">
+          <input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder=" " autocomplete="off" 
+          {% if patient.id %}
+          value="{{ patient.name }}"
+          {% endif %}
+          />
+          <span class="label-span">Name</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <!-- <div class="input-group input-group-alternative"> -->
+          <label class="form-label">
+            <input class="form-control datepicker" placeholder=" " type="text" name="birth_date" required id="id_birth_date" autocomplete="off" 
+            {% if patient.birth_date %}
+            value="{{ patient.birth_date }}"
+            {% endif %}
+          />
+<!--           <div class="input-group-prepend">
+            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+          </div> -->
+            <span class="label-span">Birthdate</span>
+          </label>
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -25,30 +46,16 @@
   <div class="row">
     <div class="col-md-3">
       <div class="form-group">
-        <div class="input-group input-group-alternative">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-          </div>
-          <input class="form-control datepicker" placeholder="Birthdate" type="text" name="birth_date" required id="id_birth_date" autocomplete="off" 
-          {% if patient.birth_date %}
-          value="{{ patient.birth_date }}"
-          {% endif %}
-          />
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="form-group">
         <select name="sex" class="custom-select" required id="id_sex">
-          <option value="" selected>Sex</option>
+          <option value="" disabled selected>Sex</option>
           <option value="MALE"
-          {% if patient.sex == "male" %}
-          selected
+          {% if patient.sex == "MALE" %}
+            selected
           {% endif %}
           >Male</option>
           <option value="FEMALE"
-          {% if patient.sex == "female" %}
-          selected
+          {% if patient.sex == "FEMALE" %}
+            selected
           {% endif %}
           >Female</option>
         </select>
@@ -57,12 +64,27 @@
     <div class="col-md-3">
       <div class="form-group">
         <select name="status" class="custom-select" required id="id_status">
-          <option value="" selected>Status</option>
-          <option value="SINGLE">Single</option>
-          <option value="MARRIED">Married</option>
-          <option value="WIDOWED">Widowed</option>
-          <option value="DIVORCED">Divorced</option>
-          <option value="SEPARATED">Separated</option>
+          <option value="" disabled selected>Status</option>
+          <option value="SINGLE"
+          {% if patient.status == "SINGLE" %}
+          selected
+          {% endif %}>Single</option>
+          <option value="MARRIED"
+          {% if patient.status == "MARRIED" %}
+          selected
+          {% endif %}>Married</option>
+          <option value="WIDOWED"
+          {% if patient.status == "WIDOWED" %}
+          selected
+          {% endif %}>Widowed</option>
+          <option value="DIVORCED"
+          {% if patient.status == "DIVORCED" %}
+          selected
+          {% endif %}>Divorced</option>
+          <option value="SEPARATED"
+          {% if patient.status == "SEPARATED" %}
+          selected
+          {% endif %}>Separated</option>
       </select>
       </div>
     </div>
@@ -73,67 +95,76 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <input class="form-control" type="text" name="address" maxlength="200" id="id_address" placeholder="Address" autocomplete="off" 
-        {% if patient.address %}
-        value="{{ patient.address }}"
-        {% endif %}
-        />
+        <label class="form-label">
+          <input class="form-control" type="text" name="address" maxlength="200" id="id_address" placeholder=" " autocomplete="off" 
+          {% if patient.address %}
+          value="{{ patient.address }}"
+          {% endif %}
+          />
+          <span class="label-span">Address</span>
+        </label>
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class="form-group">
-        <input class="form-control" type="number" name="g" id="id_g" placeholder="G" required autocomplete="off" 
-        {% if patient.g %}
-        value="{{ patient.g }}"
-        {% endif %}
-        />
+        <label class="form-label">
+          <input class="form-control" type="number" name="g" id="id_g" placeholder=" " required autocomplete="off" 
+          {% if patient.g %}
+          value="{{ patient.g }}"
+          {% endif %}
+          />
+          <span class="label-span">G</span>
+        </label>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class="form-group">
-        <input class="form-control" type="number" name="p" id="id_p" placeholder="P" required autocomplete="off" 
-        {% if patient.p %}
-        value="{{ patient.p }}"
-        {% endif %}
-        />
+        <label class="form-label">
+          <input class="form-control" type="number" name="p" id="id_p" placeholder=" " required autocomplete="off" 
+          {% if patient.p %}
+          value="{{ patient.p }}"
+          {% endif %}
+          />
+          <span class="label-span">P</span>
+        </label>
       </div>
     </div>
   </div>
    
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="form-group">
-        <input class="form-control" type="number" name="a1" id="id_a1" placeholder="A1" 
+        <input class="form-control" type="number" name="a1" id="id_a1" placeholder="" autocomplete="off" 
         {% if patient.a1 %}
         value="{{ patient.a1 }}"
         {% endif %}
         />
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="form-group">
-         <input class="form-control" type="number" name="a2" id="id_a2" placeholder="A2" 
+         <input class="form-control" type="number" name="a2" id="id_a2" placeholder="" autocomplete="off" 
          {% if patient.a2 %}
         value="{{ patient.a2 }}"
         {% endif %}
         />
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="form-group">
-        <input class="form-control" type="number" name="a3" id="id_a3" placeholder="A3" autocomplete="off" 
+        <input class="form-control" type="number" name="a3" id="id_a3" placeholder="" autocomplete="off" 
          {% if patient.a3 %}
         value="{{ patient.a3 }}"
         {% endif %}
         />
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="form-group">
-        <input class="form-control" type="number" name="a4" id="id_a4" placeholder="A4" autocomplete="off" 
+        <input class="form-control" type="number" name="a4" id="id_a4" placeholder="" autocomplete="off" 
         {% if patient.a4 %}
         value="{{ patient.a4 }}"
         {% endif %}
@@ -145,39 +176,54 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="text" name="phone" maxlength="20" id="id_phone" placeholder="Phone" autocomplete="off" 
-        {% if patient.phone %}
-        value="{{ patient.phone }}"
-        {% endif %}
-        />
+        <label class="form-label">
+          <input class="form-control" type="text" name="phone" maxlength="20" id="id_phone" placeholder=" " autocomplete="off" 
+          {% if patient.phone %}
+          value="{{ patient.phone }}"
+          {% endif %}
+          />
+          <span class="label-span">Phone</span>
+        </label>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <input class="form-control" type="text" name="religion" maxlength="50" id="id_religion" placeholder="Religion" autocomplete="off" 
-        {% if patient.religion %}
-        value="{{ patient.religion }}"
-        {% endif %}
-        />
+        <label class="form-label">
+          <input class="form-control" type="text" name="religion" maxlength="50" id="id_religion" placeholder=" " autocomplete="off" 
+          {% if patient.religion %}
+          value="{{ patient.religion }}"
+          {% endif %}
+          />
+          <span class="label-span">Religion</span>
+        </label>
       </div>
     </div>
   </div>
   
   <div class="row">
     <div class="col-md-12">
-    <div class="form-group">
-      <textarea class="form-control" type="text" name="operations_history" maxlength="1000" rows=4 id="id_operations_history" placeholder="Operations History" autocomplete="off" >{% if patient.operations_history %}{{ patient.operations_history }}{% endif %}</textarea>
-    </div>
+      <div class="form-group">
+        <label class="form-label">
+          <textarea class="form-control" type="text" name="operations_history" maxlength="1000" rows=4 id="id_operations_history" placeholder=" " autocomplete="off" >{% if patient.operations_history %}{{ patient.operations_history }}{% endif %}</textarea>
+          <span class="label-span">Operations History</span>
+        </label>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-    <div class="form-group">
-      <textarea class="form-control" type="text" name="allergies_history" maxlength="1000" rows=4 id="id_allergies_history" placeholder="Allergies History" autocomplete="off" >{% if patient.allergies_history %}{{ patient.allergies_history }}{% endif %}</textarea>
-    </div>
+      <div class="form-group">
+        <label class="form-label">
+          <textarea class="form-control" type="text" name="allergies_history" maxlength="1000" rows=4 id="id_allergies_history" placeholder=" " autocomplete="off" >{% if patient.allergies_history %}{{ patient.allergies_history }}{% endif %}</textarea>
+          <span class="label-span">Allergies History</span>
+        </label>
+      </div>
     </div>
   </div>
-	<button type="submit" class="btn btn-primary" value="Submit" />Submit</button>
+	<button type="submit" class="btn btn-primary" value="Submit" />
+    <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+    <span class="btn-inner--text">Submit</span>
+  </button>
   <button type="button" id="CancelButton" class="btn btn-warning">Cancel</button>
 </form>
 

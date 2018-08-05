@@ -4,18 +4,12 @@
 <div class="table text-white">
 	<table>
 		<tr>
-			<td>Name: {{ patient.name }}</td>
-		</tr>
-		<tr>
-			<td>Visit Date: {{ record.visit_date }}</td>
+			<td colspan="2">Name: {{ patient.name }}</td>
+			<td colspan="3">Visit Date: {{ record.visit_date }}</td>
 		</tr>
 		<tr>
 			<td>BP: {{ record.bp }}</td>
-		</tr>
-		<tr>
 			<td>FH: {{ record.fh }}</td>
-		</tr>
-		<tr>
 			<td>FHT: {{ record.fht }}</td>
 		</tr>
 		<tr>
@@ -23,8 +17,6 @@
 		</tr>
 		<tr>
 			<td>EDC: {{ record.edc }}</td>
-		</tr>
-		<tr>
 			<td>AOG: {{ record.aog }}</td>
 		</tr>
 		<tr>

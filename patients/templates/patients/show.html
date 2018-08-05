@@ -5,43 +5,34 @@
 <div class= "table text-white">
     <table>
         <tr>
-            <td>Name: {{ patient.name }}</td>
-        </tr>
-        <tr>
-            <td>Birthdate: {{ patient.birth_date }}</td>
+            <td colspan="2">Name: {{ patient.name }}</td>
         </tr>
         <tr>
             <td>Age: {{ patient.get_age }}</td>
-        </tr>
-        <tr>
             <td>Sex: {{ patient.sex }}</td>
-        </tr>
-        <tr>
             <td>Status: {{ patient.status }}</td>
         </tr>
         <tr>
-            <td>Address: {{ patient.address }}</td>
+            <td colspan="4">Address: {{ patient.address }}</td>
         </tr>
         <tr>
             <td>G: {{ patient.g }}</td>
-        </tr>
-        <tr>
             <td>P: {{ patient.p }}</td>
         </tr>
         <tr>
             <td>A: {{ patient.a1 }} - {{ patient.a2 }} - {{ patient.a3 }} - {{ patient.a4 }}</td>
         </tr>
         <tr>
-            <td>Phone: {{ patient.phone }}</td>
+            <td colspan="2">Phone: {{ patient.phone }}</td>
         </tr>
         <tr>
-            <td>Religion: {{ patient.religion }}</td>
+            <td colspan="2">Religion: {{ patient.religion }}</td>
         </tr>
         <tr>
-            <td>Operations History: {{ patient.operations_history }}</td>
+            <td colspan="4">Operations History: {{ patient.operations_history }}</td>
         </tr>
         <tr>
-            <td>Allergies History: {{ patient.allergies_history }}</td>
+            <td colspan="4">Allergies History: {{ patient.allergies_history }}</td>
         </tr>
     </table>
 </div>

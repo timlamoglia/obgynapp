@@ -15,6 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
 :root
 {
     --blue: #5e72e4;
@@ -1925,7 +1926,10 @@ pre code
     vertical-align: top;
 
     border-top: .0625rem solid #dee2e6;
+
+    width: 25%;
 }
+
 .table thead th
 {
     vertical-align: bottom;
@@ -6056,6 +6060,15 @@ input[type='button'].btn-block
     list-style: none;
 
     border-radius: .25rem;
+}
+
+.page-of
+{
+    line-height: 1.25;
+    position: relative;
+    display: block;
+    margin-left: -.0625rem;
+    padding: .5rem .75rem;
 }
 
 .page-link
@@ -18514,4 +18527,35 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 {
     right: 10px;
     left: auto;
+}
+
+.form-label {
+  margin:10px 0;
+  position:relative;
+  display:inline-block;
+  font-size:16px;
+  width: 100%;
+}
+  
+.label-span {
+  padding:10px;
+  pointer-events: none;
+  position:absolute;
+  left:0;
+  top:0;
+  transition: 0.2s;
+  transition-timing-function: ease;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  opacity:0.5;
+}
+
+input {
+  padding:10px;
+}
+
+input:focus + span, input:not(:placeholder-shown) + span, textarea:focus + span, textarea:not(:placeholder-shown) + span {
+  opacity:1;
+  transform: scale(0.90) translateY(-80%) translateX(-10px);
+  color:white;
+  text-shadow: 1px 1px 4px #000000
 }

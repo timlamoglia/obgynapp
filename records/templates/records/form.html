@@ -23,22 +23,23 @@
 	<div class="row">
 		<div class="col-12 col-md-8">
 			<div class="form-group">
-				<input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder="Name" value="{{ patient }}" disabled />
+				<label class="form-label">
+					<input class="form-control" type="text" name="name" maxlength="100" required id="id_name" placeholder=" " value="{{ patient }}" disabled />
+					<span class="label-span">Name</span>
+        		</label>
 			</div>
 		</div>
 			
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-			    <div class="input-group input-group-alternative">
-			    	<div class="input-group-prepend">
-			    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-			    	</div>
-			    	<input class="form-control datepicker" placeholder="Visit Date" type="text" name="visit_date" required id="id_visit_date" autocomplete="off" 
+		    	<label class="form-label">
+		    		<input class="form-control datepicker" placeholder=" " type="text" name="visit_date" required id="id_visit_date" autocomplete="off" 
 			    	{% if record.visit_date %}
 			    	value="{{ record.visit_date }}"
 			     	{% endif %}
 			     	/>
-				</div>
+		     		<span class="label-span">Visit Date</span>
+    			</label>
 			</div>
 		</div>
 	</div>
@@ -46,29 +47,38 @@
 	<div class="row">
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="bp" id="id_bp" placeholder="BP" required autocomplete="off"  
-			    {% if record.bp %}
-			    value="{{ record.bp }}"
-			    {% endif %}
-			    />
+				<label class="form-label">
+					<input class="form-control" type="number" name="bp" id="id_bp" placeholder=" " required autocomplete="off"  
+				    {% if record.bp %}
+				    value="{{ record.bp }}"
+				    {% endif %}
+				    />
+				    <span class="label-span">BP</span>
+    			</label>
 			</div>
 		</div>
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="fh" id="id_fh" placeholder="FH" required autocomplete="off" 
-			    {% if record.fh %}
-			    value="{{ record.fh }}"
-			    {% endif %}
-			    />
+				<label class="form-label">
+					<input class="form-control" type="number" name="fh" id="id_fh" placeholder=" " required autocomplete="off" 
+				    {% if record.fh %}
+				    value="{{ record.fh }}"
+				    {% endif %}
+				    />
+				 	<span class="label-span">FH</span>
+    			</label>
 			</div>
 		</div>
 		<div class="col-6 col-md-4">
 			<div class="form-group">
-				<input class="form-control" type="number" name="fht" id="id_fht" placeholder="FHT" required autocomplete="off" 
-			    {% if record.fht %}
-			    value="{{ record.fht }}"
-			    {% endif %}
-			    />
+				<label class="form-label">
+					<input class="form-control" type="number" name="fht" id="id_fht" placeholder=" " required autocomplete="off" 
+				    {% if record.fht %}
+				    value="{{ record.fht }}"
+				    {% endif %}
+				    />
+				    <span class="label-span">FHT</span>
+    			</label>
 			</div>
 		</div>
 	</div>
@@ -76,18 +86,18 @@
 <div class="row">
 	<div class="col-6 col-md-4">
 		<div class="form-group">
-		    <div class="input-group input-group-alternative">
-		    	<div class="input-group-prepend">
-		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-		    	</div>
-		    	<input class="form-control datepicker" placeholder="LMP" type="text" name="lmp" required id="id_lmp" autocomplete="off" 
+			<label class="form-label">
+		    	<input class="form-control datepicker" placeholder=" " type="text" name="lmp" required id="id_lmp" autocomplete="off" 
 		    	{% if record.lmp %}
 		    	value="{{ record.lmp }}"
 		     	{% endif %}
 		     	/>
-			</div>
+		     	<span class="label-span">LMP</span>
+			</label>
 		</div>
 	</div>
+</div>
+<div class="row">
 	<div class="col-6 col-md-4">
 		<div class="form-group">
 			<button type="button" id="Compute" class="btn btn-primary" >Compute EDC/AOG</button>
@@ -98,25 +108,26 @@
 <div class="row">
 	<div class="col-6 col-md-4">
 		<div class="form-group">
-		    <div class="input-group input-group-alternative">
-		    	<div class="input-group-prepend">
-		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-		    	</div>
-		    	<input class="form-control datepicker" placeholder="EDC" type="text" name="edc" required id="id_edc" autocomplete="off" 
+			<label class="form-label">
+		    	<input class="form-control datepicker" placeholder=" " type="text" name="edc" required id="id_edc" autocomplete="off" 
 		    	{% if record.edc %}
 		    	value="{{ record.edc }}"
 		     	{% endif %}
 		     	/>
-			</div>
+		     	<span class="label-span">EDC</span>
+			</label>
 		</div>
 	</div>
 	<div class="col-6 col-md-4">
 		<div class="form-group">
-			<input class="form-control" type="number" name="aog" id="id_aog" placeholder="AOG" required step="0.01"   
-		    {% if record.aog %}
-		    value="{{ record.aog }}"
-		    {% endif %}
-		    />
+			<label class="form-label">
+				<input class="form-control" type="number" name="aog" id="id_aog" placeholder=" " required step="0.01"   
+			    {% if record.aog %}
+			    value="{{ record.aog }}"
+			    {% endif %}
+			    />
+			    <span class="label-span">AOG</span>
+			</label>
 		</div>
 	</div>
 </div>
@@ -124,42 +135,42 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			<textarea class="form-control" type="text" name="diagnosis" maxlength="1000" rows=4 id="id_diagnosis" placeholder="Diagnosis" autocomplete="off" required >{% if record.diagnosis %}{{ record.diagnosis }}{% endif %}</textarea>
+			<label class="form-label">
+				<textarea class="form-control" type="text" name="diagnosis" maxlength="1000" rows=4 id="id_diagnosis" placeholder=" " autocomplete="off" required >{% if record.diagnosis %}{{ record.diagnosis }}{% endif %}</textarea>
+				<span class="label-span">Diagnosis</span>
+			</label>
 		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-  			<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder="Medication" autocomplete="off" required >{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
+			<label class="form-label">
+  				<textarea class="form-control" type="text" name="medication" maxlength="1000" rows=4 id="id_medication" placeholder=" " autocomplete="off" required >{% if record.medication %}{{ record.medication }}{% endif %}</textarea>
+  				<span class="label-span">Medication</span>
+			</label>
 		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-6 col-md-4">
 		<div class="form-group">
-		    <div class="input-group input-group-alternative">
-		    	<div class="input-group-prepend">
-		    	<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-		    	</div>
-		    	<input class="form-control datepicker" placeholder="Return Date" type="text" name="return_date" required id="id_return_date" autocomplete="off" 
+			<label class="form-label">
+		    	<input class="form-control datepicker" placeholder=" " type="text" name="return_date" required id="id_return_date" autocomplete="off" 
 		    	{% if record.return_date %}
 		    	value="{{ record.return_date }}"
 		     	{% endif %}
 		     	/>
-			</div>
+		     	<span class="label-span">Return Date</span>
+			</label>
 		</div>
 	</div>
 </div>
-
-<div class="row">
-	<div class="col-6 col-md-4">
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" value="Submit" />Submit</button>
-			<button type="button" id="CancelButton" class="btn btn-warning">Cancel</button>
-		</div>
-	</div>
-</div>
+	<button type="submit" class="btn btn-primary" value="Submit" />
+	    <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+			<span class="btn-inner--text">Submit</span>
+	</button>
+	<button type="button" id="CancelButton" class="btn btn-warning">Cancel</button>
 </form>
 
 <script type="text/javascript">
@@ -176,10 +187,10 @@
 		edcFix = ('0' + (edc.getMonth()+1)).slice(-2) + '/' + ('0' + edc.getDate()).slice(-2) + '/' + edc.getFullYear();
 		document.getElementById("id_edc").value = edcFix;
 		// var aog = (Math.round(Math.abs((edcFix.getTime() - Date.parse(visitDateInput.value))/(oneDay))));
-		alert(Date.parse(visitDateInput.value));
+		// alert(Date.parse(visitDateInput.value));
 		var aog = (Math.round(Math.abs(Date.parse(edcFix) - Date.parse(visitDateInput.value))/(oneDay)));
 		aog = Math.round((aog/7)*10) / 10
-		alert(aog);
+		// alert(aog);
 		// document.getElementById("id_edc").value = edc.toISOString().slice(0,10);
 		document.getElementById("id_aog").value = aog;
 	}

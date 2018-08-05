@@ -11,19 +11,48 @@
       </tr>
     </thead>
     <tbody>
-      {% for patient in patient_list %}
-      <tr>
-        <td class="text-white">{{ patient.name }}</td>
-        <td class="text-white">{{ patient.sex }}</td>
-        <td class="text-white"><a class="text-white" href="{% url 'patients:show' patient.id %}">view</a></td>
-        <!-- <td><a href="{% url 'patients:edit' patient.id %}">edit</a></td>
-          <td><a href="{% url 'patients:delete' patient.id %}">delete</a></td> -->
+      {% if patient_list %}
+        {% for patient in patient_list %}
+        <tr>
+          <td class="text-white">{{ patient.name }}</td>
+          <td class="text-white">{{ patient.sex }}</td>
+          <td class="text-white"><a class="text-white" href="{% url 'patients:show' patient.id %}">view</a></td>
         </tr>
         {% endfor %}
+      {% else %}
+      <tr><td class="text-white">No results</td></tr>
+      {% endif %}
     </tbody>
   </table>
 
-  <button id="NewButton" class="btn btn-primary float-left submit-button">Add New Patient</button>
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <i class="fa fa-angle-left"></i>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+    {% endif %}
+    <li class="page-of text-white">
+      <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    </li>
+    {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+        <i class="fa fa-angle-right"></i>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+  <button id="NewButton" class="btn btn-primary float-left submit-button">
+    <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+    <span class="btn-inner--text">Add New Patient</span>
+  </button>
 
   <script type="text/javascript">
       document.getElementById("NewButton").onclick = function () {

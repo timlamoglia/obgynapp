@@ -14,18 +14,25 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for record in record_list %}
-		<tr>
-			<td class="text-white">{{ record.visit_date }}</td>
-			<td class="text-white"><a class="text-white" href="{% url 'records:show' patient.id record.id %}">view</a></td>
-			<!-- <td><a href="{% url 'records:edit' patient.id record.id %}">edit</a></td> -->
-    		<!-- <td><a href="{% url 'patients:delete' patient.id %}">delete</a></td> -->
-    	</tr>
-    	{% endfor %}
+		{% if record_list %}
+			{% for record in record_list %}
+			<tr>
+				<td class="text-white">{{ record.visit_date }}</td>
+				<td class="text-white"><a class="text-white" href="{% url 'records:show' patient.id record.id %}">view</a></td>
+	    	</tr>
+	    	{% endfor %}
+	    {% else %}
+	    	<tr>
+	    		<td><span class="text-white">No records found</span></td>
+	    	</tr>
+	    {% endif %}
 	</tbody>
 </table>
 
-<button id="NewButton" class="btn btn-primary float-left submit-button" >Add New Record</button>
+<button id="NewButton" class="btn btn-primary float-left submit-button" >
+    <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+    <span class="btn-inner--text">Add New Record</span>
+</button>
 
 <script type="text/javascript">
     document.getElementById("NewButton").onclick = function () {
